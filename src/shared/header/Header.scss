@@ -1,0 +1,43 @@
+nav ul {
+    padding: 0px 20px;
+}
+
+li a {
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+header ul li a:hover {
+    color: red;
+}
+
+li a::after {
+    content: '';
+    margin: auto;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    border-radius: 2px;
+    left: 0;
+    top: 85%;
+    box-shadow: 0px 0px 10px;
+    background: rgba(188, 84, 84, 0.801);
+    transition: 0.6s ease-in-out;
+}
+
+li a:hover::after {
+    width: 80%;
+    transform: translateX(10%);
+}
+
+
+
+nav ul li:nth-child(1) {
+    margin-right: 10px;
+}
+
+.navbar-brand {
+    margin-left: 35px;
+}

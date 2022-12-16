@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+.left {
+    margin: 4em 2em;
+    float: left;
+    font-size: 14pt;
+    text-align: justify;
+    width: 50%;
+}
+
+.left h1 {
+    font-weight: 300;
+}
+
+.left button {
+    position: relative;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    background-color: #dc3535da;
+    transition: .4s ease-in;
+    z-index: 1;
+}
+
+.left button::before,
+.left button::after {
+    position: absolute;
+    content: "";
+    z-index: -1;
+}
+
+.btn-1:hover {
+    background-color: #eb3838cd;
+    box-shadow: 6px 6px 0px #dc35354c;
+    top: -2px;
+    left: -2px;
+}
+
+.container {
+    position: absolute;
+    backdrop-filter: blur(4px);
+    right: 4em;
+    width: 500px;
+    height: 520px;
+    margin-top: 4rem;
+    box-shadow: 0 10px 15px rgba(179, 179, 179, 0.7);
+    border-radius: 1%;
+    border: 2px solid #8c8c8c;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+
+.hr1 {
+    border-top: 1px dashed #8c8b8b;
+    border-bottom: 1px dashed #fff;
+}
+
+.container div h1,
+h3 {
+    line-height: 2;
+    font-size: 1.5rem;
+
+}
+
+.input {
+    position: relative;
+    width: 100%;
+    padding: 2px;
+    height: 50px;
+    margin-bottom: 1.4rem;
+    margin-top: 1rem;
+}
+
+.your-input input {
+    width: 100%;
+    height: 50px;
+    padding-top: 1.4rem;
+    padding-left: 9px;
+    outline: none;
+    border: 1px solid #8c8c8c;
+    border-radius: 3px;
+    transition: .2s;
+    background-color: inherit;
+}
+
+.your-input label {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: absolute;
+    top: 30%;
+    left: 10px;
+    font-size: 0.9rem;
+    transition: .3s;
+}
+
+.input input:focus~label,
+.input input:not(:placeholder-shown)~label {
+    top: 12%;
+    font-size: 0.8rem;
+    color: inherit;
+}
+
+.input input:focus {
+    border-width: 2px;
+    border-color: black;
+}
+
+.input input::placeholder {
+    color: transparent;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container a {
+    padding: .2rem;
+}
+
+.container a {
+    text-decoration: none;
+    width: max-content;
+    color: inherit;
+    font-style: italic;
+    transition: all 0.5s ease-in-out;
+}
+
+.container a:hover {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.container button {
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 2px;
+    color: black;
+    border: none;
+    font-size: 1rem;
+    transition: all 0.5s ease-in-out;
+    font-weight: 500;
+    margin-top: 13px;
+}
+
+.container button:hover {
+    background: rgb(26, 25, 25);
+    color: #fff;
+}
+
+@media (max-width:990px) {
+    .container {
+        position: static;
+        margin-top: 2em;
+        width: 90%;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .container div h1,
+    h3 {
+        line-height: 1;
+        font-size: 1.2em;
+
+    }
+
+}

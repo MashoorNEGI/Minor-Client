@@ -1,0 +1,62 @@
+// Login Page
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap');
+
+.Register-form {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 0.8%;
+    background-color: burlywood;
+    width: 40%;
+    height: 60vh;
+    box-shadow: 5px 10px #888888;
+    padding: 2px;
+    margin: 2.5em auto;
+}
+
+.R-I-div {
+    border-radius: 5%;
+    border: none;
+    margin: 20px auto;
+    padding: 4px;
+    width: 50%;
+}
+
+.Register-input {
+    float: right;
+    padding: 2px;
+}
+
+.Register-form img {
+    width: 3em;
+    display: block;
+    margin: 10px auto;
+}
+
+.Register-form .Register-btn {
+    text-decoration: none;
+    font-weight: 400;
+    color: white;
+    background-color: rgb(219, 152, 64);
+    display: block;
+    padding: 0.7em;
+    width: 5vw;
+    text-align: center;
+    margin: 10px auto;
+    transition: 0.7s ease;
+}
+
+.Register-form .Register-btn:hover {
+    color: black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.Register-l-btn {
+    padding: 0.7em;
+    margin: auto;
+    width: max-content;
+}
+
+.Register-l-btn a {
+    text-decoration: none;
+    color: blueviolet;
+    font-weight: 900;
+}
