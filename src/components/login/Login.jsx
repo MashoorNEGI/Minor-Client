@@ -1,12 +1,10 @@
 import "./Login.scss"
 import React from 'react';
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
 function Login() {
-    const redirect = useNavigate()
-    const [Email, setEmail] = useState('')
-    const [Password, setPassword] = useState('')
-    const [Fac_ID, setFac_ID] = useState('')
+    const [ Email, setEmail ] = useState('')
+    const [ Password, setPassword ] = useState('')
+    const [ Fac_ID, setFac_ID ] = useState('')
     const userlogin = async (e) => {
         e.preventDefault();
         try {
@@ -28,7 +26,7 @@ function Login() {
             } else if (res.status === 200) {
 
                 localStorage.setItem("token", JSON.stringify(data));
-                redirect('/cards')
+                window.location = "/cards"
             }
         } catch (err) {
             console.log(err);

@@ -32,12 +32,15 @@ li a:hover::after {
     transform: translateX(10%);
 }
 
-
-
 nav ul li:nth-child(1) {
     margin-right: 10px;
 }
 
 .navbar-brand {
     margin-left: 35px;
+}
+
+.header-Box {
+    position: absolute;
+    right: 25px;
 }
