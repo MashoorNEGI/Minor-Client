@@ -41,7 +41,7 @@ function Login() {
                 <p style={{ width: '85%' }}>  Easier to mark student attendance as well as record them in Digital sheets. Print students record as per the attendance sheet.</p>
                 <button onClick={() => { window.location = "/contact" }} className="btn-1">Contact</button>
             </div>
-            <form method="POST" onSubmit={userlogin} className="container">
+            <form method="POST" onSubmit={userlogin} className="Login-container">
                 <div>
                     <h1 className="text-center">Log in</h1>
                     <h3 className="text-center">Mark  attendance in a digital way!</h3>

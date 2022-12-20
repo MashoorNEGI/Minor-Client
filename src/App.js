@@ -7,6 +7,7 @@ import Table from "./Pages/Table"
 import Cards from "./Pages/Cards";
 import Contact from "./Pages/Contact";
 import Error from "./Pages/Error";
+import Admin from "./Pages/Admin";
 function App() {
   const user = localStorage.getItem("token");
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/attendance-data" element={<Navigate replace to="/" />} />
           <Route path="/cards" element={<Navigate replace to="/" />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/Admin" element={<Admin />} />
           <Route path={"*" || "/*"} element={<Error />} />
         </Routes>
       </div>
