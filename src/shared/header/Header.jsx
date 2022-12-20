@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
+import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import "./Header.scss"
@@ -20,9 +21,11 @@ function Header() {
   const Log_out = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("course")
+    localStorage.removeItem("Admin")
     window.location.reload()
   }
   const user = localStorage.getItem("token")
+  const owner = localStorage.getItem("Admin")
   return (
     <>
       <header>
@@ -35,7 +38,7 @@ function Header() {
             <li className="nav-item"><a className="nav-link" href="/contact">Contact</a></li>
           </ul>
           {
-            user &&
+            localStorage.length > 0  &&
             <>
               <Box className='header-Box' style={{ width: 'max-content' }} sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Account settings">
@@ -86,6 +89,15 @@ function Header() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
+                {
+                  owner &&
+                  <>
+                    <MenuItem>
+                      <Avatar /> Admin
+                    </MenuItem>
+                    <Divider />
+                  </>
+                }
                 <MenuItem onClick={Log_out}>
                   <ListItemIcon>
                     <Logout fontSize="small" />

@@ -8,25 +8,31 @@ function Login() {
     const userlogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/users/Login', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    Email,
-                    Password,
-                    Fac_ID
-                })
-            })
-            const data = await res.json()
-            console.log(data);
-            if (res.status === 400) {
-                alert("somthing went wrong")
-            } else if (res.status === 200) {
+            if (Email === "ayushdeepnegi@gmail.com" || Password === '15124117') {
+                localStorage.setItem("Admin", Email,Password)
+                window.location = "/Admin"
+            } else {
 
-                localStorage.setItem("token", JSON.stringify(data));
-                window.location = "/cards"
+                const res = await fetch('/users/Login', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        Email,
+                        Password,
+                        Fac_ID
+                    })
+                })
+                const data = await res.json()
+                console.log(data);
+                if (res.status === 400) {
+                    alert("somthing went wrong")
+                } else if (res.status === 200) {
+
+                    localStorage.setItem("token", JSON.stringify(data));
+                    window.location = "/cards"
+                }
             }
         } catch (err) {
             console.log(err);

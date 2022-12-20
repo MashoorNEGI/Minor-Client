@@ -10,6 +10,7 @@ import Error from "./Pages/Error";
 import Admin from "./Pages/Admin";
 function App() {
   const user = localStorage.getItem("token");
+  const owner = localStorage.getItem("Admin");
   return (
     <Router>
       <div className='max-w-screen-md mx-auto pt-20'>
@@ -21,7 +22,7 @@ function App() {
           <Route path="/attendance-data" element={<Navigate replace to="/" />} />
           <Route path="/cards" element={<Navigate replace to="/" />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/Admin" element={<Admin />} />
+          {owner ? <Route path="/Admin" element={<Admin />} /> : <Route path="/Admin" element={<Navigate replace to="/" />}/>}
           <Route path={"*" || "/*"} element={<Error />} />
         </Routes>
       </div>
