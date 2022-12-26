@@ -38,7 +38,7 @@ function Header() {
             <li className="nav-item"><a className="nav-link" href="/contact">Contact</a></li>
           </ul>
           {
-            localStorage.length > 0  &&
+            localStorage.length > 0 &&
             <>
               <Box className='header-Box' style={{ width: 'max-content' }} sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Account settings">

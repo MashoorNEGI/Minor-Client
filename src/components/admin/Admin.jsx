@@ -8,7 +8,6 @@ const Admin = () => {
                 <div className="item item--3 rounded d-flex  justify-content-center align-items-center btn-1"> <a href="/Record">Record</a></div>
                 <div className="item item--4 rounded d-flex  justify-content-center align-items-center btn-1"> <a href="/Handling">Query Handling</a></div>
                 <div className="item item--5 rounded d-flex  justify-content-center align-items-center btn-1"> <a href="/update-Courses">Update Courses</a></div>
-                <div className="item item--6 rounded d-flex  justify-content-center align-items-center btn-1"> <a href="/n">6: Brown</a> </div>
             </div>
 
         </>

@@ -1,4 +1,10 @@
 .contact-form {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    height: 70vh;
+    margin: 2% auto;
+    display: grid;
+    padding: 1.5rem;
     width: 40%;
     float: right;
     margin-right: 2em;
@@ -13,7 +19,7 @@
 }
 
 .contact-message h3,
- .balance {
+.balance {
     width: 89%;
     margin: auto;
     margin-bottom: 2px;
@@ -55,3 +61,13 @@
     color: #555;
     font-weight: 400;
 }
+
+// .contact-page {
+//     background-color: rgba(255, 255, 255, 0.4);
+//     backdrop-filter: blur(5px);
+//     width: 90%;
+//     height: 80vh;
+//     margin: 2% auto;
+//     display: grid;
+//     padding: 1.5rem;
+// }

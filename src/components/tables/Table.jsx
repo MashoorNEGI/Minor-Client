@@ -1,14 +1,30 @@
 import axios from 'axios'
 import { useEffect, useState, useReducer } from 'react'
 import { Button } from '@mui/material'
+import { useReactToPrint } from 'react-to-print'
 import './table.scss'
+import { useRef } from 'react'
 function Table() {
-    const [data, setdata] = useState('')
-    const [reducervalue, forceUpdate] = useReducer(x => x + 1, 0);
-    const [status, setstatus] = useState('')
+    const [ data, setdata ] = useState('')
+    const [ reducervalue, forceUpdate ] = useReducer(x => x + 1, 0);
+    const [ status, setstatus ] = useState('')
+    const reset_att = "Stable"
+    const reset_course = localStorage.getItem("course")
     const Fac_ID = JSON.parse(localStorage.getItem("token")).userlogin.Fac_ID
     const courses = localStorage.getItem("course")
-
+    const reset = async () => {
+        try {
+            const res = await axios.post('/reset', {
+                Course: reset_course,
+                Attendance: reset_att
+            })
+            if (res.status === 200) {
+                window.location = '/'
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const getstudent = async () => {
         try {
             const res = await axios.post('/getstudent', {
@@ -23,7 +39,7 @@ function Table() {
 
     }
     // ------------- status update system------------
-    const [Enroll_no, setUser] = useState('')
+    const [ Enroll_no, setUser ] = useState('')
 
 
 
@@ -40,17 +56,24 @@ function Table() {
         else {
         }
     }
+    const componentRef = useRef()
+    const handleprint = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: 'emp-data',
+        onAfterPrint: () => alert('print success')
+    })
+
 
     useEffect(() => {
         getstudent()
         attend()
-    }, [reducervalue])
+    }, [ reducervalue ])
 
     return (<>
         {
             data.length > 0 ?
                 <div className='tables'>
-                    <table className="table table-striped  table-hover">
+                    <table className="table table-striped  table-hover" ref={componentRef}>
                         <thead>
                             <tr>
                                 <th>Enroll_no</th>
@@ -79,7 +102,6 @@ function Table() {
                                                             <Button variant="outlined" onClick={() => {
                                                                 setstatus('Absent')
                                                                 setUser(data.Enroll_no)
-                                                                console.log(Enroll_no);
                                                                 forceUpdate()
                                                             }} color='error'>Absent</Button>
                                                         </>
@@ -91,7 +113,8 @@ function Table() {
                             }
                         </tbody>
                     </table>
-                    <Button className='table-submit' variant="contained" href='/'>Submit</Button>
+                    <Button className='table-submit' onClick={reset} variant="contained">Submit</Button>
+                    <Button className='table-print' onClick={handleprint} variant="contained">Print</Button>
                 </div>
                 : <main className="flex-shrink-0">
                     <div className="mx-auto" style={{ width: '40%' }}>

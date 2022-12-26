@@ -8,8 +8,8 @@ function Login() {
     const userlogin = async (e) => {
         e.preventDefault();
         try {
-            if (Email === "ayushdeepnegi@gmail.com" || Password === '15124117') {
-                localStorage.setItem("Admin", Email,Password)
+            if (Email === "Naruto@gmail.com" || Password === 'narutozindabaad'  ) {
+                localStorage.setItem("Admin", Email)
                 window.location = "/Admin"
             } else {
 
@@ -41,9 +41,9 @@ function Login() {
 
     }
     return (
-        <div>
+        <div className="Login-main-container">
             <div className="left">
-                <h1>welcome to  Attendance record system </h1>
+                <h1>welcome <span>to</span> college Attendance system </h1>
                 <p style={{ width: '85%' }}>  Easier to mark student attendance as well as record them in Digital sheets. Print students record as per the attendance sheet.</p>
                 <button onClick={() => { window.location = "/contact" }} className="btn-1">Contact</button>
             </div>

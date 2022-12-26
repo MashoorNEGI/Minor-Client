@@ -5,14 +5,20 @@ nav ul {
 li a {
     cursor: pointer;
     position: relative;
-    text-decoration: none;
+    -decoration: none;
+    text-transform: uppercase;
     color: inherit;
 }
 
 header ul li a:hover {
     color: red;
 }
-
+.left span{
+    text-transform: lowercase;
+}
+.left h1{
+    text-transform: capitalize;
+}
 li a::after {
     content: '';
     margin: auto;

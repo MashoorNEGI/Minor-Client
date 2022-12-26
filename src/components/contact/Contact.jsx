@@ -1,6 +1,36 @@
-import React from 'react'
 import "./Contact.scss"
+import React, { useState } from 'react';
 const ContactForm = () => {
+    const [ Email, setEmail ] = useState('')
+    const [ Name, setName ] = useState('')
+    const [ Message, setMessage ] = useState('')
+    const send = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch('/users/contact', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    Email,
+                    Name,
+                    Message
+                })
+            })
+            const data = await res.json()
+            console.log(data);
+            if (res.status === 400) {
+                alert("somthing went wrong")
+            } else if (res.status === 200) {
+                window.location.reload()
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
     return (<>
         <div className="contact-page mt-5">
             <div className='contact-message mt-5'>
@@ -25,31 +55,37 @@ const ContactForm = () => {
                         <i class="fa fa-envelope-o"></i>
                         <span>
                             <h5>Ayushdeepnegi@gmail.com</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            <p>naruto@gmail.com</p>
                         </span>
                     </div>
                 </div>
             </div>
             <div className='contact-form mt-5'>
                 <h2 style={{ height: '7vh' }}>Get in touch</h2>
-                <form>
+                <form action="POST" onSubmit={send}>
                     <div className="mb-3">
                         <label className="form-label" htmlFor="name">
                             full Name
                         </label>
-                        <input className="form-control" type="text" id="name" autoComplete='off' required />
+                        <input className="form-control" type="text" id="Name" autoComplete='off' required
+                            value={Name}
+                            onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className="mb-3">
                         <label className="form-label" htmlFor="email">
                             Email
                         </label>
-                        <input className="form-control" type="email" id="email" autoComplete='off' required />
+                        <input className="form-control" type="email" id="Email" autoComplete='off' 
+                            value={Email} 
+                            onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="mb-3">
                         <label className="form-label" htmlFor="message">
                             Message
                         </label>
-                        <textarea className="form-control" id="message" required />
+                        <textarea className="form-control" id="message" name='Message' required
+                            value={Message}
+                            onChange={(e) => setMessage(e.target.value)} />
                     </div>
                     <button className="btn btn-danger" type="submit">
                         Send
