@@ -8,7 +8,7 @@ function Login() {
     const userlogin = async (e) => {
         e.preventDefault();
         try {
-            if (Email === "Naruto@gmail.com" || Password === 'narutozindabaad'  ) {
+            if (Email === "ayushdeepnegi@gmail.com" || Password === 'ayushdeep'  ) {
                 localStorage.setItem("Admin", Email)
                 window.location = "/Admin"
             } else {

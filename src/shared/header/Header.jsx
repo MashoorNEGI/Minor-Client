@@ -91,12 +91,12 @@ function Header() {
               >
                 {
                   owner &&
-                  <>
+                  <div>
                     <MenuItem>
                       <Avatar /> Admin
                     </MenuItem>
                     <Divider />
-                  </>
+                  </div>
                 }
                 <MenuItem onClick={Log_out}>
                   <ListItemIcon>
