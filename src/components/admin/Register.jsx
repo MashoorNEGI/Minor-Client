@@ -6,7 +6,7 @@ const Register = () => {
         Fac_Name: "",
         Department: "",
         Phone_no: "",
-        Email: "",
+        Email: "",  
         Password: ""
     })
 
@@ -55,7 +55,7 @@ const Register = () => {
                     <input type="text" className='col' name="Department" value={account.Department} onChange={handleit} placeholder='Department' autoComplete='off' required />
                     <div className="w-100"></div>
                     <input type="Phone" className='col' name="Phone_no" value={account.Phone_no} onChange={handleit} placeholder='Phone no.' autoComplete='off' required />
-                    <input type="Password" className='col' name="Password" value={account.Password} onChange={handleit} placeholder='Password' autoComplete='off' required />
+                    <input type="Password" className='col' name="Password" value={account.Password} onChange={handleit} placeholder='Password' pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{5,10}' autoComplete='off' required />
                     <button className='btn'>Register</button>
                 </form>
             </div>

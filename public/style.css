@@ -25,7 +25,6 @@ body {
     height: 100vh;
     color: white;
     animation: colorSlide 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
-
 }
 
 .text-center h1,

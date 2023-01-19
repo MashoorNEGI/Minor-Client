@@ -3,6 +3,7 @@ import { useEffect, useState, useReducer } from 'react'
 import { Button } from '@mui/material'
 import { useReactToPrint } from 'react-to-print'
 import './table.scss'
+import { CSVLink } from "react-csv"
 import { useRef } from 'react'
 function Table() {
     const [ data, setdata ] = useState('')
@@ -33,12 +34,13 @@ function Table() {
             })
             const student = res.data
             setdata(Array.from(student.found))
+            console.log(student.found);
         } catch (err) {
             console.log(err);
         }
 
     }
-    // ------------- status update system------------
+    //  ------------- status update system------------
     const [ Enroll_no, setUser ] = useState('')
 
 
@@ -48,10 +50,8 @@ function Table() {
             Enroll_no,
             Attendance: status
         })
-
-
         if (res.status === 200) {
-            // alert("success")
+
         }
         else {
         }
@@ -63,7 +63,25 @@ function Table() {
         onAfterPrint: () => alert('print success')
     })
 
-
+    const header = [
+        {
+            label: "Enroll_no", key: "Enroll_no"
+        },
+        {
+            label: "Name", key: "Sname"
+        },
+        {
+            label: "Course", key: "Course"
+        },
+        {
+            label: "Attendance", key: "Attendance"
+        }
+    ]
+    const csvLink = {
+        filename: "file.xls",
+        headers: header,
+        data: data
+    }
     useEffect(() => {
         getstudent()
         attend()
@@ -71,9 +89,9 @@ function Table() {
 
     return (<>
         {
-            data.length > 0 ?
-                <div className='tables'>
-                    <table className="table table-striped  table-hover" ref={componentRef}>
+            data.length > 0 ? <>
+                <div className='tables overflow-auto'>
+                    <table className="table table-striped  table-hover overflow-auto">
                         <thead>
                             <tr>
                                 <th>Enroll_no</th>
@@ -112,10 +130,12 @@ function Table() {
                                 )
                             }
                         </tbody>
+
                     </table>
-                    <Button className='table-submit' onClick={reset} variant="contained">Submit</Button>
-                    <Button className='table-print' onClick={handleprint} variant="contained">Print</Button>
                 </div>
+                <div className='table-download'>
+                    <Button className='table-submit' onClick={reset} variant="contained">Submit</Button>
+                    <CSVLink {...csvLink}><Button className='table-print' variant='contained'>download</Button></CSVLink></div></>
                 : <main className="flex-shrink-0">
                     <div className="mx-auto" style={{ width: '40%' }}>
                         <h1 className="mt-5">Data Not Found</h1>

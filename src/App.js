@@ -9,6 +9,9 @@ import Contact from "./Pages/Contact";
 import Error from "./Pages/Error";
 import Admin from "./Pages/Admin";
 import Record from "./components/admin/Record";
+import Query from "./components/admin/query";
+import Student from "./components/admin/student";
+import Courses from "./components/admin/courses";
 function App() {
   const user = localStorage.getItem("token");
   const owner = localStorage.getItem("Admin");
@@ -20,10 +23,13 @@ function App() {
           <Route path="/Register-faculty" element={<Register />} />
           {user ? <Route path="/attendance-data" element={<Table />} /> : <Route path="/attendance-data" element={<Navigate replace to="/" />} />}
           {user && <Route path="/cards" element={<Cards />} />}
+          <Route path="/update-Courses" element={<Courses />} />
           <Route path="/attendance-data" element={<Navigate replace to="/" />} />
           <Route path="/cards" element={<Navigate replace to="/" />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/Record" element={<Record />} />
+          <Route path="/Handling" element={<Query />} />
+          <Route path="/update-student" element={<Student />} />
           {owner ? <Route path="/Admin" element={<Admin />} /> : <Route path="/Admin" element={<Navigate replace to="/" />} />}
           <Route path={"*" || "/*"} element={<Error />} />
         </Routes>

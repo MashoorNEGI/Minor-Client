@@ -165,7 +165,13 @@ h3 {
     display: grid;
     padding: 1.5rem;
 }
-
+.login-error{
+    display: none;
+    position: absolute;
+    left: 40%;
+    z-index: 3;
+    transition: all ease-in 2s;
+}
 @media (max-width:990px) {
     .Login-container {
         position: static;

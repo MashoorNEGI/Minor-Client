@@ -8,11 +8,10 @@ function Login() {
     const userlogin = async (e) => {
         e.preventDefault();
         try {
-            if (Email === "ayushdeepnegi@gmail.com" || Password === 'ayushdeep'  ) {
+            if (Email === "ayushdeepnegi@gmail.com" && Password === 'Ayushdeep') {
                 localStorage.setItem("Admin", Email)
                 window.location = "/Admin"
             } else {
-
                 const res = await fetch('/users/Login', {
                     method: 'POST',
                     headers: {
@@ -27,11 +26,21 @@ function Login() {
                 const data = await res.json()
                 console.log(data);
                 if (res.status === 400) {
-                    alert("somthing went wrong")
+                    const invalid = document.getElementById("ban")
+                    invalid.style.display = "block"
+                    setTimeout(function () {
+                        invalid.style.display = "none"
+                    }, 3000);
                 } else if (res.status === 200) {
-
                     localStorage.setItem("token", JSON.stringify(data));
                     window.location = "/cards"
+                } else if (res.status === 403) {
+                    const invalid = document.getElementById("ban")
+                    invalid.innerHTML = "Please fill correct information"
+                    invalid.style.display = "block"
+                    setTimeout(function () {
+                        invalid.style.display = "none"
+                    }, 3000);
                 }
             }
         } catch (err) {
@@ -40,7 +49,8 @@ function Login() {
 
 
     }
-    return (
+    return (<>
+        <p className="login-error alert alert-danger" id="ban">Something went wrong</p>
         <div className="Login-main-container">
             <div className="left">
                 <h1>welcome <span>to</span> college Attendance system </h1>
@@ -56,20 +66,21 @@ function Login() {
                 <div className="your-input">
                     <div className="your-input">
                         <div className="input">
-                            <input type="email" name="Email" id="Email" required placeholder="Enter Email" autoComplete="off"
+                            <input type="email" name="Email" id="Email" placeholder="Enter Email"
+                                autoComplete="off"
                                 value={Email}
                                 onChange={(e) => setEmail(e.target.value)} />
                             <label htmlFor="email">Email</label>
                         </div>
                         <div className="input">
-                            <input type="text" name="Fac_ID" id="Fac_ID" placeholder="Enter ID" required autoComplete="off"
+                            <input type="text" name="Fac_ID" id="Fac_ID" placeholder="Enter ID" autoComplete="off"
                                 value={Fac_ID}
                                 onChange={(e) => setFac_ID(e.target.value)} />
                             <label htmlFor="facID">Faculty ID</label>
                         </div>
                         <div className="input">
-                            <input type="password" name="Password" id="Password" required placeholder="Enter Password" autoComplete="off"
-                                value={Password}
+                            <input type="password" name="Password" id="Password"
+                                placeholder="Enter Password" autoComplete="off"
                                 onChange={(e) => setPassword(e.target.value)} />
                             <label htmlFor="password">
                                 Password
@@ -79,7 +90,7 @@ function Login() {
                 </div>
                 <button type="submit">Sign in</button>
             </form>
-        </div>
+        </div></>
     );
 }
 export default Login;

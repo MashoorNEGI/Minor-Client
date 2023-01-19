@@ -15,8 +15,8 @@ const Record = () => {
     }, [])
     return (
         <>
-            <div className="tables">
-                <table className="table table-striped  table-hover">
+            <div className="tables mt-5overflow-auto" >
+                <table className="table table-striped  table-hover ">
                     <thead>
                         <tr>
                             <th>Fac_ID</th>
