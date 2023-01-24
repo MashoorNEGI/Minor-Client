@@ -92,8 +92,17 @@ function Header() {
                 {
                   owner &&
                   <div>
-                    <MenuItem>
+                    <MenuItem onClick={()=> window.location = '/admin'}>
                       <Avatar /> Admin
+                    </MenuItem>
+                    <Divider />
+                  </div>
+                }
+                {
+                  user &&
+                  <div>
+                    <MenuItem onClick={()=> window.location = '/cards'}>
+                      <Avatar /> User
                     </MenuItem>
                     <Divider />
                   </div>

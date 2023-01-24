@@ -1,12 +1,11 @@
 import axios from 'axios'
 import { useEffect, useState, useReducer } from 'react'
 import { Button } from '@mui/material'
-import { useReactToPrint } from 'react-to-print'
 import './table.scss'
 import { CSVLink } from "react-csv"
-import { useRef } from 'react'
 function Table() {
     const [ data, setdata ] = useState('')
+    const [ isButtonClicked, setIsButtonClicked ] = useState(false);
     const [ reducervalue, forceUpdate ] = useReducer(x => x + 1, 0);
     const [ status, setstatus ] = useState('')
     const reset_att = "Stable"
@@ -20,7 +19,7 @@ function Table() {
                 Attendance: reset_att
             })
             if (res.status === 200) {
-                window.location = '/'
+                window.location = '/cards'
             }
         } catch (error) {
             console.log(error);
@@ -34,7 +33,6 @@ function Table() {
             })
             const student = res.data
             setdata(Array.from(student.found))
-            console.log(student.found);
         } catch (err) {
             console.log(err);
         }
@@ -42,26 +40,12 @@ function Table() {
     }
     //  ------------- status update system------------
     const [ Enroll_no, setUser ] = useState('')
-
-
-
     const attend = async () => {
         const res = await axios.post('/update', {
             Enroll_no,
             Attendance: status
         })
-        if (res.status === 200) {
-
-        }
-        else {
-        }
     }
-    const componentRef = useRef()
-    const handleprint = useReactToPrint({
-        content: () => componentRef.current,
-        documentTitle: 'emp-data',
-        onAfterPrint: () => alert('print success')
-    })
 
     const header = [
         {
@@ -83,14 +67,13 @@ function Table() {
         data: data
     }
     useEffect(() => {
+        if (isButtonClicked) { attend() }
         getstudent()
-        attend()
     }, [ reducervalue ])
-
     return (<>
         {
             data.length > 0 ? <>
-                <div className='tables overflow-auto'>
+                <div className='attendance-tables overflow-auto'>
                     <table className="table table-striped  table-hover overflow-auto">
                         <thead>
                             <tr>
@@ -103,8 +86,8 @@ function Table() {
                         <tbody>
                             {
                                 data.map((data, index) =>
-                                    <tr key={index}>
-                                        <td name={data.Enroll_no} value={data.Enroll_no}>{data.Enroll_no.slice(0, 3)}</td>
+                                    <tr key={index} onMouseMove={() => { setUser(data.Enroll_no); }}>
+                                        <td name={data.Enroll_no} value={data.Enroll_no}>{data.Enroll_no}</td>
                                         <td>{data.Course}</td>
                                         <td>{data.Sname}</td>
                                         <td>
@@ -112,16 +95,8 @@ function Table() {
                                                 {
                                                     data.Attendance !== 'Stable' ? <p>{data.Attendance}</p> :
                                                         <>
-                                                            <Button variant="outlined" onClick={() => {
-                                                                setstatus('Present')
-                                                                setUser(data.Enroll_no)
-                                                                forceUpdate()
-                                                            }}>Present</Button>
-                                                            <Button variant="outlined" onClick={() => {
-                                                                setstatus('Absent')
-                                                                setUser(data.Enroll_no)
-                                                                forceUpdate()
-                                                            }} color='error'>Absent</Button>
+                                                            <Button onMouseOver={() => { setstatus('present') }} variant="outlined" onClick={() => { setIsButtonClicked(true); forceUpdate(); }}>Present</Button>
+                                                            <Button onMouseMove={() => { setstatus('Absent') }} variant="outlined" onClick={() => { setIsButtonClicked(true); forceUpdate(); }} color='error'>Absent</Button>
                                                         </>
                                                 }
                                             </div>

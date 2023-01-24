@@ -12,6 +12,7 @@ import Record from "./components/admin/Record";
 import Query from "./components/admin/query";
 import Student from "./components/admin/student";
 import Courses from "./components/admin/courses";
+import About from "./Pages/About";
 function App() {
   const user = localStorage.getItem("token");
   const owner = localStorage.getItem("Admin");
@@ -27,6 +28,7 @@ function App() {
           <Route path="/attendance-data" element={<Navigate replace to="/" />} />
           <Route path="/cards" element={<Navigate replace to="/" />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
           <Route path="/Record" element={<Record />} />
           <Route path="/Handling" element={<Query />} />
           <Route path="/update-student" element={<Student />} />
