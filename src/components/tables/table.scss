@@ -40,6 +40,13 @@ td .att-status {
     width: 100%;
 }
 
+.att-status .reload {
+    cursor: pointer;
+    visibility: hidden;
+    position: relative;
+    left: 40px;
+}
+
 .flex-shrink-0 a {
     text-decoration: none;
     color: grey;
@@ -56,11 +63,19 @@ td .att-status {
 .table-print:hover {
     color: inherit;
 }
-.attend-date{
-    position:absolute;
+
+.attend-date {
+    position: absolute;
     top: 100px;
     left: 100px;
 }
+
+.header-name {
+    background: '#f2f2f2';
+    color: '#333';
+    font-Weight: 'bold';
+}
+
 @media (max-width:990px) {
     .attendance-tables {
         width: 90vw;

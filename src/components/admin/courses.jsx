@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 const Course = () => {
     const [ data, setdata ] = useState({ Fac_ID: "", courses: "" });
     const [ course, setcourse ] = useState()
+    const [ isButtonClicked, setIsButtonClicked ] = useState(false);
     const [ found, setfound ] = useState([])
     const [ reducervalue, forceUpdate ] = useReducer(x => x + 1, 0);
     let username, values;
@@ -27,7 +28,7 @@ const Course = () => {
         }
     }
     const getcourses = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const { Fac_ID } = data
             const res = await axios.post('http://localhost:4000/getcourses', {
@@ -36,7 +37,7 @@ const Course = () => {
             setfound(res.data.found[ 0 ].courses)
             if (res.status === 200) {
                 document.getElementById('student-popup').style.display = 'flex';
-                console.log(res.data.found[ 0 ].courses);
+                // console.log(res.data.found[ 0 ].courses);
             }
         } catch (error) {
             console.log(error);
@@ -53,7 +54,10 @@ const Course = () => {
         }
     }
     useEffect(() => {
-        del_course();
+        if (isButtonClicked) {
+            del_course();
+            getcourses();
+        }
     }, [ reducervalue ])
     return (<>
         <div className="form-container">
@@ -71,7 +75,7 @@ const Course = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-            <form style={{ 'width': '40%', 'float': 'right' }} onSubmit={getcourses}>
+            <form style={{ 'width': '40%', 'float': 'right' }} onSubmit={(e) => { e.preventDefault(); getcourses(); }}>
                 <h1>View Courses</h1>
                 <div className="form-group border-top" style={{ padding: '20px 0' }}>
                     <label htmlFor="exampleInputEmail1">Faculty ID</label>
@@ -97,9 +101,9 @@ const Course = () => {
                         {
 
                             found.map((found, index) =>
-                                <tr onMouseMove={() => { setcourse(found); console.log(found); }} style={{ 'textAlign': 'center' }} key={index}>
+                                <tr onMouseMove={() => { setcourse(found) }} style={{ 'textAlign': 'center' }} key={index}>
                                     <td>{found}</td>
-                                    <td><Button onClick={() => { del_course(); forceUpdate(); }} variant="outlined" color="error">DELETE</Button></td>
+                                    <td><Button onClick={() => { setIsButtonClicked(true); forceUpdate(); }} variant="outlined" color="error">DELETE</Button></td>
                                 </tr>
                             )
                         }

@@ -66,7 +66,7 @@ const Student = () => {
                 'If-None-Match': 'ETag-value-from-previous-request'
             }
         })
-        console.log(res.data);
+        // console.log(res.data);
         setgetdata(res.data)
     }
     const del_student = () => {

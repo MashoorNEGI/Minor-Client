@@ -3,27 +3,26 @@ import { useEffect, useState, useReducer } from 'react'
 import { Button } from '@mui/material'
 import './table.scss'
 import { CSVLink } from "react-csv"
+import { AiOutlineReload } from 'react-icons/ai'
+import moment from "moment"
 function Table() {
     const [ data, setdata ] = useState('')
     const [ isButtonClicked, setIsButtonClicked ] = useState(false);
     const [ reducervalue, forceUpdate ] = useReducer(x => x + 1, 0);
-    const [ status, setstatus ] = useState('')
-    const reset_att = "Stable"
+    const [ status, setstatus ] = useState('Stable')
+    const [ Enroll_no, setUser ] = useState('')
+    const [ reset_roll, setroll ] = useState('')
     const reset_course = localStorage.getItem("course")
     const Fac_ID = JSON.parse(localStorage.getItem("token")).userlogin.Fac_ID
     const courses = localStorage.getItem("course")
     const reset = async () => {
         try {
+            setstatus("Stable")
             const res = await axios.post('/reset', {
-                Course: reset_course,
-                Attendance: reset_att
+                Course: reset_course, Attendance: status
             })
-            if (res.status === 200) {
-                window.location = '/cards'
-            }
-        } catch (error) {
-            console.log(error);
-        }
+            if (res.status === 200) { window.location = '/cards' }
+        } catch (error) { console.log(error); }
     }
     const getstudent = async () => {
         try {
@@ -36,17 +35,22 @@ function Table() {
         } catch (err) {
             console.log(err);
         }
-
     }
     //  ------------- status update system------------
-    const [ Enroll_no, setUser ] = useState('')
+    const reload = async () => {
+        try {
+            setstatus('Stable')
+            const res = await axios.post('/reset', {
+                Enroll_no: reset_roll, Attendance: status
+            })
+            if (res.status === 200) { console.log('success'); }
+        } catch (error) { console.log(error); }
+    }
     const attend = async () => {
         const res = await axios.post('/update', {
-            Enroll_no,
-            Attendance: status
+            Enroll_no, Attendance: status
         })
     }
-
     const header = [
         {
             label: "Enroll_no", key: "Enroll_no"
@@ -59,10 +63,13 @@ function Table() {
         },
         {
             label: "Attendance", key: "Attendance"
+        },
+        {
+            label: `marked on (${moment().format('dddd, MMMM Do YYYY')})`, key: `Date (${moment().format('MM/DD/YYYY')})`
         }
     ]
     const csvLink = {
-        filename: "file.xls",
+        filename: `Attendance(${moment().format('MM-DD-YYYY')})`,
         headers: header,
         data: data
     }
@@ -86,14 +93,22 @@ function Table() {
                         <tbody>
                             {
                                 data.map((data, index) =>
-                                    <tr key={index} onMouseMove={() => { setUser(data.Enroll_no); }}>
+                                    <tr key={index} onMouseEnter={() => { setUser(data.Enroll_no); setroll(data.Enroll_no) }}>
                                         <td name={data.Enroll_no} value={data.Enroll_no}>{data.Enroll_no}</td>
                                         <td>{data.Course}</td>
                                         <td>{data.Sname}</td>
                                         <td>
-                                            <div className='att-status'>
+                                            <div className='att-status' onMouseEnter={() => {
+                                                if (data.Attendance !== 'Stable') {
+                                                    document.getElementById(index).style.visibility = 'visible'
+                                                }
+                                            }} onMouseLeave={() => {
+                                                if (data.Attendance !== 'Stable') {
+                                                    document.getElementById(index).style.visibility = 'hidden'
+                                                }
+                                            }}>
                                                 {
-                                                    data.Attendance !== 'Stable' ? <p>{data.Attendance}</p> :
+                                                    data.Attendance !== 'Stable' ? <><p style={{ 'display': 'inline-block' }}>{data.Attendance}</p><AiOutlineReload className='reload' onClick={() => { reload(); forceUpdate(); }} id={index} /></> :
                                                         <>
                                                             <Button onMouseOver={() => { setstatus('present') }} variant="outlined" onClick={() => { setIsButtonClicked(true); forceUpdate(); }}>Present</Button>
                                                             <Button onMouseMove={() => { setstatus('Absent') }} variant="outlined" onClick={() => { setIsButtonClicked(true); forceUpdate(); }} color='error'>Absent</Button>
@@ -123,3 +138,4 @@ function Table() {
 }
 
 export default Table;
+

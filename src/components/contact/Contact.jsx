@@ -75,8 +75,8 @@ const ContactForm = () => {
                         <label className="form-label" htmlFor="email">
                             Email
                         </label>
-                        <input className="form-control" type="email" id="Email" autoComplete='off' 
-                            value={Email} 
+                        <input className="form-control" type="email" id="Email" autoComplete='off'
+                            value={Email}
                             onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="mb-3">

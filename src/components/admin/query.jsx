@@ -5,7 +5,7 @@ const Query = () => {
     const receive = async () => {
         const res = await axios.get('users/query')
         setdata(res.data)
-        console.log(res.data[ 0 ]);
+        // console.log(res.data[ 0 ]);
     }
     useEffect(() => {
         receive()
