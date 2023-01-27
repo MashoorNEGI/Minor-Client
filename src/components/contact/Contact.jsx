@@ -7,7 +7,7 @@ const ContactForm = () => {
     const send = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/users/contact', {
+            const res = await fetch('https://attendance-s52k.onrender.com/users/contact', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"

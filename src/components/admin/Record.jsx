@@ -7,7 +7,7 @@ const Record = () => {
     const [ data, setdata ] = useState([])
     const [ user, setUser ] = useState('')
     const read = async () => {
-        const res = await axios.get('users/Admin', {
+        const res = await axios.get('https://attendance-s52k.onrender.com/users/Admin', {
             headers: {
                 'If-None-Match': 'ETag-value-from-previous-request'
             }
@@ -17,7 +17,7 @@ const Record = () => {
     }
     const del_user = async (e) => {
         e.preventDefault()
-        const res = await axios.post('users/delete', {
+        const res = await axios.post('https://attendance-s52k.onrender.com/users/delete', {
             Fac_ID: user
         })
 

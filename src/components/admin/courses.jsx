@@ -19,7 +19,7 @@ const Course = () => {
         e.preventDefault();
         try {
             const { Fac_ID, courses } = data
-            const res = axios.post('http://localhost:4000/addcourses', {
+            const res = axios.post('https://attendance-s52k.onrender.com/addcourses', {
                 Fac_ID,
                 courses
             })
@@ -31,7 +31,7 @@ const Course = () => {
         // e.preventDefault();
         try {
             const { Fac_ID } = data
-            const res = await axios.post('http://localhost:4000/getcourses', {
+            const res = await axios.post('https://attendance-s52k.onrender.com/getcourses', {
                 Fac_ID
             })
             setfound(res.data.found[ 0 ].courses)
@@ -45,7 +45,7 @@ const Course = () => {
     }
     const del_course = () => {
         try {
-            const res = axios.post('http://localhost:4000/deletecourses', {
+            const res = axios.post('https://attendance-s52k.onrender.com/deletecourses', {
                 Fac_ID: data.Fac_ID,
                 courses: course
             })

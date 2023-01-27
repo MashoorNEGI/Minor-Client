@@ -38,7 +38,7 @@ const Student = () => {
             const { Fac_ID, Sname, Course, Enroll_no, Attendance } = data
             console.log(data);
             for (let index = 0; index < data.length; index++) {
-                const res = axios.post('http://localhost:4000/addstudent', {
+                const res = axios.post('https://attendance-s52k.onrender.com/addstudent', {
                     Fac_ID: data[ index ].Fac_ID, Sname: data[ index ].Name, Course: data[ index ].Course, Enroll_no: data[ index ].Enroll_no, Attendance: data[ index ].Attendance
                 })
             }
@@ -62,7 +62,7 @@ const Student = () => {
         }
     }
     const getstudent = async () => {
-        const res = await axios.get('http://localhost:4000/student-data', {
+        const res = await axios.get('https://attendance-s52k.onrender.com/student-data', {
             headers: {
                 'If-None-Match': 'ETag-value-from-previous-request'
             }
@@ -71,7 +71,7 @@ const Student = () => {
         setgetdata(res.data)
     }
     const del_student = () => {
-        const res = axios.post('/delete', {
+        const res = axios.post('https://attendance-s52k.onrender.com/delete', {
             Enroll_no: student
         })
     }

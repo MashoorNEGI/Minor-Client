@@ -12,7 +12,7 @@ function Login() {
                 localStorage.setItem("Admin", Email)
                 window.location = "/Admin"
             } else {
-                const res = await fetch('/users/Login', {
+                const res = await fetch('https://attendance-s52k.onrender.com/users/Login', {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json"

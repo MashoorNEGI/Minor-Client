@@ -18,7 +18,7 @@ function Table() {
     const reset = async () => {
         try {
             setstatus("Stable")
-            const res = await axios.post('/reset', {
+            const res = await axios.post('https://attendance-s52k.onrender.com/reset', {
                 Course: reset_course, Attendance: status
             })
             if (res.status === 200) { window.location = '/cards' }
@@ -26,7 +26,7 @@ function Table() {
     }
     const getstudent = async () => {
         try {
-            const res = await axios.post('/getstudent', {
+            const res = await axios.post('https://attendance-s52k.onrender.com/getstudent', {
                 Fac_ID,
                 courses,
             })
@@ -40,14 +40,14 @@ function Table() {
     const reload = async () => {
         try {
             setstatus('Stable')
-            const res = await axios.post('/reset', {
+            const res = await axios.post('https://attendance-s52k.onrender.com/reset', {
                 Enroll_no: reset_roll, Attendance: status
             })
             if (res.status === 200) { console.log('success'); }
         } catch (error) { console.log(error); }
     }
     const attend = async () => {
-        const res = await axios.post('/update', {
+        const res = await axios.post('https://attendance-s52k.onrender.com/update', {
             Enroll_no, Attendance: status
         })
     }

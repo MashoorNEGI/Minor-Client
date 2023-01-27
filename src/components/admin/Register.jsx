@@ -13,7 +13,7 @@ const Register = () => {
     const accountdata = async (e) => {
         e.preventDefault()
         const { Fac_ID, Fac_Name, Department, Phone_no, Email, Password } = account
-        const res = await fetch("users/Register", {
+        const res = await fetch("https://attendance-s52k.onrender.com/users/Register", {
             method: 'POST',
             headers: {
                 "Content-type": "application/json"

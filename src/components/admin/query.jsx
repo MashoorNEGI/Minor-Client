@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const Query = () => {
     const [ data, setdata ] = useState([])
     const receive = async () => {
-        const res = await axios.get('users/query')
+        const res = await axios.get('https://attendance-s52k.onrender.com/users/query')
         setdata(res.data)
         // console.log(res.data[ 0 ]);
     }
