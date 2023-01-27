@@ -42,6 +42,7 @@ const Student = () => {
                     Fac_ID: data[ index ].Fac_ID, Sname: data[ index ].Name, Course: data[ index ].Course, Enroll_no: data[ index ].Enroll_no, Attendance: data[ index ].Attendance
                 })
             }
+            alert("all inserted")
         } catch (error) {
             console.log(error);
         }

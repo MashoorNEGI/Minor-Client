@@ -55,7 +55,7 @@ const Register = () => {
     return (
         <>
             <div className="container" style={{ width: '40%' }}>
-                <form id="form" action="" method="" onSubmit={accountdata} noValidate>
+                <form id="form" action="" method="" onSubmit={accountdata}>
                     <h3>register</h3>
                     <fieldset>
                         <label htmlFor="ID">ID:</label>
